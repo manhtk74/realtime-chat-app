@@ -9,6 +9,7 @@ import messagesRoutes from "./routes/MessagesRoutes.js";
 import groupRoutes from "./routes/GroupRoutes.js";
 import setupSocket from "./socket.js";
 import friendRequestsRoutes from "./routes/FriendRequestsRoute.js";
+import uploadRoutes from "./routes/UploadRoutes.js";
 
 dotenv.config();
 
@@ -27,11 +28,15 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 
+// Serve uploaded files statically
+app.use("/uploads", express.static("uploads"));
+
 app.use("/api/auth", authRoutes);
 app.use("/api/contacts", contactsRoutes);
 app.use("/api/messages", messagesRoutes);
 app.use("/api/groups", groupRoutes);
 app.use("/api/friend-requests", friendRequestsRoutes);
+app.use("/api/upload", uploadRoutes);
 
 const server = app.listen(port, () => {
   console.log(`Server is running on port ${port} at http://localhost:${port}`);
