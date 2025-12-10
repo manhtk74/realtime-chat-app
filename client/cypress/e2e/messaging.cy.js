@@ -106,156 +106,157 @@ describe("Messaging Tests - DM, Group, Upload File", () => {
     addFriend(userA, userC);
   });
 
-  //   describe("1. Direct Message (DM)", () => {
-  //     beforeEach(() => {
-  //       login(userA);
-  //     });
+  describe("1. Direct Message (DM)", () => {
+    beforeEach(() => {
+      login(userA);
+    });
+    d;
 
-  //     it("should display contacts list", () => {
-  //       cy.get(".icon-container").first().click();
-  //       cy.wait(1000);
-  //       cy.contains(userB.fullname).should("be.visible");
-  //     });
+    it("should display contacts list", () => {
+      cy.get(".icon-container").first().click();
+      cy.wait(1000);
+      cy.contains(userB.fullname).should("be.visible");
+    });
 
-  //     it("should open chat when clicking on contact", () => {
-  //       cy.get(".icon-container").first().click();
-  //       cy.wait(1000);
-  //       cy.contains(userB.fullname).click();
-  //       cy.get(".single-chat-header").should("contain", userB.fullname);
-  //     });
+    it("should open chat when clicking on contact", () => {
+      cy.get(".icon-container").first().click();
+      cy.wait(1000);
+      cy.contains(userB.fullname).click();
+      cy.get(".single-chat-header").should("contain", userB.fullname);
+    });
 
-  //     it("should send text message to contact", () => {
-  //       const testMessage = `Hello from ${userA.fullname} at ${Date.now()}`;
+    it("should send text message to contact", () => {
+      const testMessage = `Hello from ${userA.fullname} at ${Date.now()}`;
 
-  //       cy.get(".icon-container").first().click();
-  //       cy.wait(1000);
-  //       cy.contains(userB.fullname).click();
-  //       cy.wait(500);
+      cy.get(".icon-container").first().click();
+      cy.wait(1000);
+      cy.contains(userB.fullname).click();
+      cy.wait(500);
 
-  //       cy.get('.message-bar-searchbar input[type="text"]').type(testMessage);
-  //       cy.get(".message-bar-icon").eq(2).click();
+      cy.get('.message-bar-searchbar input[type="text"]').type(testMessage);
+      cy.get(".message-bar-icon").eq(2).click();
 
-  //       // Message should appear in chat
-  //       cy.contains(testMessage).should("be.visible");
-  //     });
+      // Message should appear in chat
+      cy.contains(testMessage).should("be.visible");
+    });
 
-  //     it("should send message by pressing Enter", () => {
-  //       const testMessage = `Enter key test ${Date.now()}`;
+    it("should send message by pressing Enter", () => {
+      const testMessage = `Enter key test ${Date.now()}`;
 
-  //       cy.get(".icon-container").first().click();
-  //       cy.wait(1000);
-  //       cy.contains(userB.firstName).click();
-  //       cy.wait(500);
+      cy.get(".icon-container").first().click();
+      cy.wait(1000);
+      cy.contains(userB.firstName).click();
+      cy.wait(500);
 
-  //       cy.get('.message-bar-searchbar input[type="text"]').type(
-  //         testMessage + "{enter}"
-  //       );
+      cy.get('.message-bar-searchbar input[type="text"]').type(
+        testMessage + "{enter}"
+      );
 
-  //       cy.contains(testMessage).should("be.visible");
-  //     });
-  //   });
+      cy.contains(testMessage).should("be.visible");
+    });
+  });
 
-  //   describe("2. Receive Messages", () => {
-  //     beforeEach(() => {
-  //       // User A gửi message cho User B
-  //       login(userA);
-  //       cy.get(".icon-container").first().click();
-  //       cy.wait(1000);
-  //       cy.contains(userB.firstName).click();
-  //       cy.wait(500);
-  //       cy.get('.message-bar-searchbar input[type="text"]').type(
-  //         `Test message ${Date.now()}{enter}`
-  //       );
-  //       cy.wait(2000);
-  //       logout();
-  //     });
+  describe("2. Receive Messages", () => {
+    beforeEach(() => {
+      // User A gửi message cho User B
+      login(userA);
+      cy.get(".icon-container").first().click();
+      cy.wait(1000);
+      cy.contains(userB.firstName).click();
+      cy.wait(500);
+      cy.get('.message-bar-searchbar input[type="text"]').type(
+        `Test message ${Date.now()}{enter}`
+      );
+      cy.wait(2000);
+      logout();
+    });
 
-  //     it("should receive and display message from contact", () => {
-  //       login(userB);
-  //       cy.get(".icon-container").first().click();
-  //       cy.wait(1000);
-  //       cy.contains(userA.firstName).click();
-  //       cy.wait(1000);
+    it("should receive and display message from contact", () => {
+      login(userB);
+      cy.get(".icon-container").first().click();
+      cy.wait(1000);
+      cy.contains(userA.firstName).click();
+      cy.wait(1000);
 
-  //       cy.contains("Test message").should("be.visible");
-  //     });
-  //   });
+      cy.contains("Test message").should("be.visible");
+    });
+  });
 
-  //   describe("3. Create Group", () => {
-  //     beforeEach(() => {
-  //       login(userA);
-  //     });
+  describe("3. Create Group", () => {
+    beforeEach(() => {
+      login(userA);
+    });
 
-  //     it("should open create group modal", () => {
-  //       cy.get(".tooltip.sub-header-icon").eq(1).click();
-  //       cy.get(".create-group-modal").should("be.visible");
-  //     });
+    it("should open create group modal", () => {
+      cy.get(".tooltip.sub-header-icon").eq(1).click();
+      cy.get(".create-group-modal").should("be.visible");
+    });
 
-  //     it("should successfully create a group with members", () => {
-  //       const groupName = `Test Group ${Date.now()}`;
+    it("should successfully create a group with members", () => {
+      const groupName = `Test Group ${Date.now()}`;
 
-  //       cy.get(".tooltip.sub-header-icon").eq(1).click();
-  //       cy.get('input[placeholder*="Group Name"]').type(groupName);
-  //       cy.get(".multi-select-container .multi-select").click();
-  //       cy.contains(
-  //         '.multi-select-container [role="option"]',
-  //         userB.fullname
-  //       ).click();
-  //       cy.contains(
-  //         '.multi-select-container [role="option"]',
-  //         userC.fullname
-  //       ).click();
+      cy.get(".tooltip.sub-header-icon").eq(1).click();
+      cy.get('input[placeholder*="Group Name"]').type(groupName);
+      cy.get(".multi-select-container .multi-select").click();
+      cy.contains(
+        '.multi-select-container [role="option"]',
+        userB.fullname
+      ).click();
+      cy.contains(
+        '.multi-select-container [role="option"]',
+        userC.fullname
+      ).click();
 
-  //       // Click outside để close dropdown
-  //       cy.get('input[placeholder*="Group Name"]').click();
-  //       cy.get(".create-group-input-container .submit-button").click();
+      // Click outside để close dropdown
+      cy.get('input[placeholder*="Group Name"]').click();
+      cy.get(".create-group-input-container .submit-button").click();
 
-  //       cy.contains(groupName, { timeout: 5000 }).should("be.visible");
-  //     });
-  //   });
+      cy.contains(groupName, { timeout: 5000 }).should("be.visible");
+    });
+  });
 
-  //   describe("4. Group Messages", () => {
-  //     const groupName = `Group Chat ${Date.now()}`;
+  describe("4. Group Messages", () => {
+    const groupName = `Group Chat ${Date.now()}`;
 
-  //     before(() => {
-  //       // Tạo group
-  //       login(userA);
-  //       cy.get(".tooltip.sub-header-icon").eq(1).click();
-  //       cy.get('input[placeholder*="Group Name"]').type(groupName);
-  //       cy.get(".multi-select-container .multi-select").click();
-  //       cy.contains(
-  //         '.multi-select-container [role="option"]',
-  //         userB.fullname
-  //       ).click();
-  //       cy.contains(
-  //         '.multi-select-container [role="option"]',
-  //         userC.fullname
-  //       ).click();
-  //       cy.get('input[placeholder*="Group Name"]').click();
-  //       cy.get(".create-group-input-container .submit-button").click();
-  //       logout();
-  //     });
+    before(() => {
+      // Tạo group
+      login(userA);
+      cy.get(".tooltip.sub-header-icon").eq(1).click();
+      cy.get('input[placeholder*="Group Name"]').type(groupName);
+      cy.get(".multi-select-container .multi-select").click();
+      cy.contains(
+        '.multi-select-container [role="option"]',
+        userB.fullname
+      ).click();
+      cy.contains(
+        '.multi-select-container [role="option"]',
+        userC.fullname
+      ).click();
+      cy.get('input[placeholder*="Group Name"]').click();
+      cy.get(".create-group-input-container .submit-button").click();
+      logout();
+    });
 
-  //     beforeEach(() => {
-  //       login(userA);
-  //     });
+    beforeEach(() => {
+      login(userA);
+    });
 
-  //     it("should display created group in list", () => {
-  //       cy.contains(groupName).should("be.visible");
-  //     });
+    it("should display created group in list", () => {
+      cy.contains(groupName).should("be.visible");
+    });
 
-  //     it("should send message to group", () => {
-  //       const groupMessage = `Group message ${Date.now()}`;
+    it("should send message to group", () => {
+      const groupMessage = `Group message ${Date.now()}`;
 
-  //       cy.contains(groupName).click();
-  //       cy.wait(500);
-  //       cy.get('.message-bar-searchbar input[type="text"]').type(
-  //         groupMessage + "{enter}"
-  //       );
+      cy.contains(groupName).click();
+      cy.wait(500);
+      cy.get('.message-bar-searchbar input[type="text"]').type(
+        groupMessage + "{enter}"
+      );
 
-  //       cy.contains(groupMessage).should("be.visible");
-  //     });
-  //   });
+      cy.contains(groupMessage).should("be.visible");
+    });
+  });
 
   describe("5. Upload File in DM", () => {
     beforeEach(() => {

@@ -7,7 +7,6 @@ describe("Authentication Tests", () => {
 
   describe("1. Form Toggle", () => {
     it("should switch to sign up form when clicking Sign Up button", () => {
-      // Click button trong overlay-right, không phải button submit
       cy.get(".overlay-right button.ghost").click();
       cy.get("#container").should("have.class", "right-panel-active");
       cy.get(".sign-up-container").should("be.visible");

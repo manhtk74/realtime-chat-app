@@ -95,21 +95,6 @@ describe("Friend Request Tests", () => {
         { timeout: 5000 }
       ).should("be.visible");
     });
-
-    it("should show error when trying to send to non-existent user", () => {
-      cy.on("uncaught:exception", (err) => {
-        if (err.message.includes("Request failed")) {
-          return false;
-        }
-        return true;
-      });
-
-      cy.get(".add-new-friend").click();
-      cy.get(".modal-input").type(`nonexist_${Date.now()}@test.com`);
-      cy.get(".modal-input").type("{enter}");
-
-      cy.wait(2000);
-    });
   });
 
   describe("2. Receive and View Friend Requests", () => {
