@@ -107,7 +107,6 @@ describe("Messaging Tests - DM, Group, Upload File", () => {
     beforeEach(() => {
       login(userA);
     });
-    d;
 
     it("should display contacts list", () => {
       cy.get(".icon-container").first().click();

@@ -387,3 +387,14 @@
   opacity: 0.5;
   pointer-events: none;
 }
+
+/* No search results message */
+.chat-list .no-results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  color: #8696a0;
+  font-size: 0.9rem;
+  text-align: center;
+}
