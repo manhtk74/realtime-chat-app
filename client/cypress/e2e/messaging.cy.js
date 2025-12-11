@@ -1,7 +1,6 @@
 describe("Messaging Tests - DM, Group, Upload File", () => {
   const baseUrl = "http://localhost:3000/auth";
 
-  // 3 users để test group chat
   const userA = {
     email: `msguserA_${Date.now()}@test.com`,
     password: "TestPassword123!",
@@ -26,7 +25,7 @@ describe("Messaging Tests - DM, Group, Upload File", () => {
     fullname: "Charlie Brown",
   };
 
-  // Helper: Sign up và setup profile
+  // Sign up và setup profile
   const signUpAndSetupProfile = (user) => {
     cy.visit(baseUrl);
     cy.get(".overlay-right button.ghost").click();
@@ -50,14 +49,14 @@ describe("Messaging Tests - DM, Group, Upload File", () => {
     cy.url({ timeout: 10000 }).should("include", "/chat");
   };
 
-  // Helper: Logout
+  // Logout
   const logout = () => {
     cy.get(".left-sidebar .avatar", { timeout: 10000 }).click();
     cy.get(".logout-button").click();
     cy.url({ timeout: 10000 }).should("include", "/auth");
   };
 
-  // Helper: Login
+  // Login
   const login = (user) => {
     cy.visit(baseUrl);
     cy.get('.sign-in-container input[type="email"]').type(user.email);
@@ -68,7 +67,7 @@ describe("Messaging Tests - DM, Group, Upload File", () => {
     cy.url({ timeout: 10000 }).should("include", "/chat");
   };
 
-  // Helper: Send friend request và accept
+  // Send friend request và accept
   const addFriend = (fromUser, toUser) => {
     login(fromUser);
     cy.get(".add-new-friend").click();
@@ -93,7 +92,6 @@ describe("Messaging Tests - DM, Group, Upload File", () => {
   };
 
   before(() => {
-    // Tạo 3 users
     signUpAndSetupProfile(userA);
     logout();
     signUpAndSetupProfile(userB);
@@ -101,7 +99,6 @@ describe("Messaging Tests - DM, Group, Upload File", () => {
     signUpAndSetupProfile(userC);
     logout();
 
-    // User A add User B và User C làm bạn
     addFriend(userA, userB);
     addFriend(userA, userC);
   });
@@ -207,7 +204,7 @@ describe("Messaging Tests - DM, Group, Upload File", () => {
         userC.fullname
       ).click();
 
-      // Click outside để close dropdown
+      // Click để đóng dropdown
       cy.get('input[placeholder*="Group Name"]').click();
       cy.get(".create-group-input-container .submit-button").click();
 
@@ -219,7 +216,6 @@ describe("Messaging Tests - DM, Group, Upload File", () => {
     const groupName = `Group Chat ${Date.now()}`;
 
     before(() => {
-      // Tạo group
       login(userA);
       cy.get(".tooltip.sub-header-icon").eq(1).click();
       cy.get('input[placeholder*="Group Name"]').type(groupName);
@@ -307,7 +303,7 @@ describe("Messaging Tests - DM, Group, Upload File", () => {
         userC.fullname
       ).click();
 
-      // Click outside để close dropdown
+      // Click để đóng dropdown
       cy.get('input[placeholder*="Group Name"]').click();
       cy.get(".create-group-input-container .submit-button").click();
       cy.contains(groupName).click();
