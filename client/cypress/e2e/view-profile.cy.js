@@ -50,42 +50,4 @@ describe('View Profile', () => {
     });
 
   });
-
-  // describe('TC 2: View Contact Profile', () => {
-    
-  //   beforeEach(() => {
-  //     cy.get('.chat-type-indicator.dms')
-  //       .next('.chats')
-  //       .find('.chat')
-  //       .first()
-  //       .click();
-
-  //     cy.get('.single-chat-header').should('be.visible');
-
-  //     cy.get('.single-chat-header .avatar').click();
-
-  //     cy.get('.left-sidebar-contact-or-group-profile').should('be.visible');
-  //   });
-
-  //   it('Should display contact profile image or default avatar', () => {
-  //     cy.get('.left-sidebar-contact-or-group-profile .profile-image')
-  //       .should('be.visible');
-  //   });
-
-  //   it('Should display contact name as heading', () => {
-  //     cy.get('.left-sidebar-contact-or-group-profile h1')
-  //       .should('be.visible')
-  //       .and('not.be.empty');
-  //   });
-
-  //   it('Should display contact email', () => {
-  //     cy.get('.left-sidebar-contact-or-group-profile .contact-info')
-  //       .should('be.visible');
-
-  //     cy.get('.left-sidebar-contact-or-group-profile .label')
-  //       .contains('Contact:')
-  //       .should('be.visible');
-  //   });
-
-  // });
 });

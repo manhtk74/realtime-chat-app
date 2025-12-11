@@ -8,6 +8,7 @@ import "./SingleChatMessageBar.css";
 import { useAppStore } from "../../../store";
 import { useSocket } from "../../../context/SocketContext";
 import upload from "../../../lib/upload";
+import { toast } from "react-toastify";
 
 const SingleChatMessageBar = () => {
   //   const emojiRef = useRef();
@@ -129,6 +130,7 @@ const SingleChatMessageBar = () => {
             });
           }
 
+          toast.success("File uploaded successfully");
           // setShowFileUploadPlaceholder(true);
         }
       }
