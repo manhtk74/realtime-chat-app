@@ -1,7 +1,6 @@
 describe("Friend Request Tests", () => {
   const baseUrl = "http://localhost:3000/auth";
 
-  // 2 users để test
   const userA = {
     email: `usera_${Date.now()}@test.com`,
     password: "TestPassword123!",
@@ -18,7 +17,7 @@ describe("Friend Request Tests", () => {
     fullName: "User B",
   };
 
-  // Helper: Sign up và setup profile
+  // Sign up và setup profile
   const signUpAndSetupProfile = (user) => {
     cy.visit(baseUrl);
     cy.get(".overlay-right button.ghost").click();
@@ -42,14 +41,14 @@ describe("Friend Request Tests", () => {
     cy.url({ timeout: 10000 }).should("include", "/chat");
   };
 
-  // Helper: Logout
+  // Logout
   const logout = () => {
     cy.get(".left-sidebar .avatar", { timeout: 10000 }).click();
     cy.get(".logout-button").click();
     cy.url({ timeout: 10000 }).should("include", "/auth");
   };
 
-  // Helper: Login
+  // Login
   const login = (user) => {
     cy.visit(baseUrl);
     cy.get('.sign-in-container input[type="email"]').type(user.email);
@@ -61,11 +60,9 @@ describe("Friend Request Tests", () => {
   };
 
   before(() => {
-    // Tạo User A
     signUpAndSetupProfile(userA);
     logout();
 
-    // Tạo User B
     signUpAndSetupProfile(userB);
     logout();
   });

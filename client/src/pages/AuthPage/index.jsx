@@ -45,25 +45,32 @@ const AuthPage = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     if (validateLogin()) {
-      const response = await apiClient.post(
-        LOGIN_ROUTE,
-        {
-          email,
-          password,
-        },
-        { withCredentials: true }
-      );
-      if (response.data.user.id) {
-        setUserInfo(response.data.user);
-        if (response.data.user.profileSetup) {
-          navigate("/chat");
-        } else {
-          navigate("/profile");
+      try {
+        const response = await apiClient.post(
+          LOGIN_ROUTE,
+          {
+            email,
+            password,
+          },
+          { withCredentials: true }
+        );
+        if (response.data.user.id) {
+          setUserInfo(response.data.user);
+          if (response.data.user.profileSetup) {
+            navigate("/chat");
+          } else {
+            navigate("/profile");
+          }
+          setActiveIcon("chat");
         }
-        setActiveIcon("chat");
-      }
 
-      toast.success("Login successful");
+        toast.success("Login successful");
+      } catch (error) {
+        console.log(error);
+        toast.error(
+          "Invalid email or password. Please check your credentials."
+        );
+      }
     }
   };
 
