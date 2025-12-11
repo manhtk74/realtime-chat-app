@@ -1,3 +1,6 @@
+// Import cypress-file-upload plugin for file upload testing
+import 'cypress-file-upload';
+
 /**
  * Custom command to login with email and password
  * @param {string} email - User email
@@ -84,4 +87,3 @@ Cypress.Commands.add('updateProfile', (firstName, lastName) => {
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-import "cypress-file-upload";

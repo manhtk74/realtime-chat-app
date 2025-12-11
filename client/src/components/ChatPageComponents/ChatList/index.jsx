@@ -676,9 +676,10 @@ const ChatList = () => {
             ) : null} */}
             {directMessagesContacts.length > 0 || groups.length > 0 ? (
               <>
-                {/* {searchedContacts.length <= 0 ? ( */}
-                {searchedContacts.length <= 0 && searchedGroups.length <= 0 ? (
+                {/* Sử dụng biến searching thay vì check length của mảng */}
+                {!searching ? (
                   <>
+                    {/* HIỆN DANH SÁCH ĐẦY ĐỦ khi KHÔNG tìm kiếm */}
                     {groups.length > 0 &&
                       (activeFilter === "all" || activeFilter === "groups") &&
                       activeFilter !== "dms" && (
@@ -702,7 +703,7 @@ const ChatList = () => {
                   </>
                 ) : (
                   <>
-                    {/* <Chats contacts={searchedContacts} /> */}
+                    {/* HIỆN KẾT QUẢ TÌM KIẾM khi ĐANG tìm kiếm */}
                     {searchedGroups.length > 0 && (
                       <>
                         <div className="chat-type-indicator groups">Groups</div>
@@ -716,6 +717,10 @@ const ChatList = () => {
                         </div>
                         <Chats contacts={searchedContacts} />
                       </>
+                    )}
+                    {/* Thông báo khi không tìm thấy kết quả */}
+                    {searchedGroups.length === 0 && searchedContacts.length === 0 && (
+                      <div className="no-results">No contacts or groups found</div>
                     )}
                   </>
                 )}
